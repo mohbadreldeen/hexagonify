@@ -1,99 +1,107 @@
 :root {
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-    color-scheme: light dark;
- 
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color-scheme: light dark;
 
-  
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-  }
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
 
-  [data-theme="dark"] {
-    --hex-bg: #111;
-    --font-color: #e1e1ff;
-    --font-color: #e1e1ff;
-    --bg-color: #222;
-    --heading-color: #818cab;
- 
+[data-theme="dark"] {
+  --hex-bg: #111;
+  --font-color: #e1e1ff;
+  --font-color: #e1e1ff;
+  --bg-color: #222;
+  --heading-color: #818cab;
 }
 
 [data-theme="light"] {
-    --hex-bg: #eee;
-    --font-color: #161625;
-   
-    --bg-color: #fff;
-    --heading-color: #818cab;
+  --hex-bg: #eee;
+  --font-color: #161625;
+
+  --bg-color: #fff;
+  --heading-color: #818cab;
 }
-   body{
-    background-color: var(--bg-color);
-   }
+body {
+  background-color: var(--bg-color);
+}
 
-   .theme-switch-wrapper{
-        position: fixed;
-        display: flex;
-        align-items: center;
-        gap:10px;
-        top: 20px;
-        right: 20px;
-        z-index: 999;
-   }
-   .theme-switch-wrapper .theme-switch{
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-   }
-   .theme-switch-wrapper .theme-switch .slider{
-        background-color: #ccc;
-        bottom: 0;
-        cursor: pointer;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition: 0.4s;
-        border-radius: 20px;
-   }
-   .theme-switch-wrapper .theme-switch .slider:before{
-    background-color: #fff;
-    bottom: 4px;
-    content: "";
-    height: 26px;
-    left: 4px;
-    position: absolute;
-    transition: 0.4s;
-    width: 26px;
-    border-radius: 50%;;
-   }
-   .theme-switch-wrapper .theme-switch input:checked + .slider{
-        background-color: #2196F3;
-   }
-   .theme-switch-wrapper .theme-switch input:checked + .slider:before{
-       
-        transform: translateX(26px);
-   }
-     
+.theme-switch-wrapper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+.theme-switch-wrapper .theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.theme-switch-wrapper .theme-switch .slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+.theme-switch-wrapper .theme-switch .slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+  border-radius: 50%;
+}
+.theme-switch-wrapper .theme-switch input:checked + .slider {
+  background-color: #2196f3;
+}
+.theme-switch-wrapper .theme-switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
 
-    #app{
-    width: 400px;
-    margin:0 auto;
-  }
-  #theme-name{
-    color:var(--font-color);
-    font-weight: 700;
-  }
-  .shape{
-    background-color: var(--hex-bg);
-    color: var(--font-color);
-  }
-  .shape{
-    text-align: center;
-    padding:35px 0;
-    margin: 20px auto;
-  }
+#app {
+  width: 400px;
+  margin: 0 auto;
+}
+#theme-name {
+  color: var(--font-color);
+  font-weight: 700;
+}
+.demo-container{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     gap: 20px;
+}
+.hex-cell {
+  background-color: var(--hex-bg);
+  color: var(--font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.hex-cell {
+  text-align: center;
+  padding: 35px 0;
+}
+.hex-grid {
+  height: 500px;
+}

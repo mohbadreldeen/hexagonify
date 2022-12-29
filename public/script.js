@@ -1,5 +1,5 @@
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light';
-
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
 
@@ -8,10 +8,9 @@ if (currentTheme) {
     }
 }
 
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
 function switchTheme(e) {
-    console.log("change theme");
+    
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         document.getElementById("theme-name").innerHTML = "Dark";
@@ -20,6 +19,8 @@ function switchTheme(e) {
         document.documentElement.setAttribute('data-theme', 'light');
         document.getElementById("theme-name").innerHTML = "Light";
     }    
+
+    localStorage.setItem('theme', document.documentElement.getAttribute('data-theme'));
 }
 
 toggleSwitch.addEventListener('change', switchTheme, false);

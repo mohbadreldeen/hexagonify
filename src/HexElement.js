@@ -1,7 +1,0 @@
-
-
-class Hexelement {
-    constructor( ) {
-        
-    }
-}
