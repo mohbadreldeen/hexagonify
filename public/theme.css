@@ -13,18 +13,18 @@
 }
 
 [data-theme="dark"] {
-  --hex-bg: #111;
-  --font-color: #e1e1ff;
-  --font-color: #e1e1ff;
-  --bg-color: #222;
+  --hex-bg: #2c2c47;
+  --font-color: #F1F3F5;
+ 
+  --bg-color: #19192b;
   --heading-color: #818cab;
 }
 
 [data-theme="light"] {
-  --hex-bg: #eee;
-  --font-color: #161625;
+  --hex-bg: #D2DEE9;
+  --font-color: #1e1e32;
 
-  --bg-color: #fff;
+  --bg-color: #f1f3f5;
   --heading-color: #818cab;
 }
 body {
@@ -47,7 +47,7 @@ body {
   height: 34px;
 }
 .theme-switch-wrapper .theme-switch .slider {
-  background-color: #ccc;
+  background-color: #D2DEE9;
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -69,7 +69,7 @@ body {
   border-radius: 50%;
 }
 .theme-switch-wrapper .theme-switch input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #2c2c47;
 }
 .theme-switch-wrapper .theme-switch input:checked + .slider:before {
   transform: translateX(26px);
