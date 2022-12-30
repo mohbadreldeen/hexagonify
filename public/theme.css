@@ -76,7 +76,6 @@ body {
 }
 
 #app {
-  width: 400px;
   margin: 0 auto;
 }
 #theme-name {
@@ -87,8 +86,10 @@ body {
      display: flex;
      justify-content: center;
      align-items: center;
-     height: 100vh;
+     
      gap: 20px;
+     padding: 100px 0;
+     border-bottom: 1px solid rgba(0,0,0,.25);
 }
 .hex-cell {
   background-color: var(--hex-bg);

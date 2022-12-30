@@ -22,6 +22,12 @@ new HexagonifyElement(document.querySelector("#demo-02"), {
   isFlatTop: true,
   borderRadius: 10,
 });
+new HexagonifyElement(document.querySelector("#demo-01-1"), {
+  size: 100,
+  isFlatTop: true,
+  borderRadius: 0
+});
+
 const grid1 = new HexagonifyGrid(document.getElementById("demo-03"), {
   size: 100,
   gridGap: 1,
