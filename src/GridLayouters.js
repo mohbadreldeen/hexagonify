@@ -7,8 +7,9 @@ const hexCubGridRadius = (itemsCount) => {
         radius++;
         i += (radius * 6);
     }
-    radius++;
     
+    if (i - (radius * 6) + 1 < itemsCount)
+        radius++;
     return radius;
 }
 
@@ -118,57 +119,64 @@ const offsetLayouter = (items, options) => {
     return gridArray;
 }
 
-const flatTopCircularLayouter = (items, grid, options) => {
-    const size = options.hexSize + options.gridGap;
+
+const getGridCoordinates = (radius) =>  {
+    let gridArray = [];
+    for(var i = 0; i < radius; i++){
+        for(var j = -i; j <= i; j++)
+        for(var k = -i; k <= i; k++)
+        for(var l = -i; l <= i; l++)
+            if(Math.abs(j) + Math.abs(k) + Math.abs(l) == i*2 && j + k + l == 0){
+                gridArray.push(new HexCubCell(j, k, l));
+            }
+    }
+    return gridArray;
+}
+
+
+const circularLayouter = (items, options) => {
+    const size = options.size + options.gridGap;
     const itemHeight = hexHeight(size, options.flatTop);
     const itemWidth = hexWidth(size, options.flatTop);
-    const centerX = grid.offsetWidth / 2 - itemWidth / 2;
-    const centerY = grid.offsetHeight / 2 - itemHeight / 2;
-    const getGridCoordinates = (radius) =>  {
-        let gridArray = [];
-        for(var i = 0; i < radius; i++){
-            for(var j = -i; j <= i; j++)
-            for(var k = -i; k <= i; k++)
-            for(var l = -i; l <= i; l++)
-                if(Math.abs(j) + Math.abs(k) + Math.abs(l) == i*2 && j + k + l == 0){
-                    gridArray.push(new HexCubCell(j, k, l));
-                }
+    
+
+    const gridSize = getCircularLayoutSize(items.length, size, options.flatTop);
+     
+    const centerX = gridSize.width / 2 - itemWidth / 2;
+    const centerY = gridSize.height / 2 - itemHeight / 2;
+   
+    const gridCords = getGridCoordinates( hexCubGridRadius(items.length) );
+
+    
+    for (let i = 0; i < gridCords.length; i++) {
+        const [x, y, z] = [gridCords[i]._x, gridCords[i]._y, gridCords[i]._z];
+        let [posX , posY] = [0 , 0];
+        if(options.isFlatTop) {
+            [posX , posY] =[
+                1.5 * x * size,
+                size * (Math.sqrt(3)/2 * x  +  Math.sqrt(3) * y)
+            ];
+        } else {
+            [posX , posY] =[
+                size * (Math.sqrt(3) * x  +  Math.sqrt(3)/2 * y),
+                1.5 * y * size
+            ];
         }
-        return gridArray;
+        if(items[i]) {
+            
+            
+            items[i].updateCords(posX + centerX  , posY + centerY);
+        }
     }
 
-    function drawGrid(gridArray) {
-        for (let i = 0; i < gridArray.length; i++) {
-            const [x, y, z] = [gridArray[i]._x, gridArray[i]._y, gridArray[i]._z];
-            let [posX , posY] = [0 , 0];
-            if(options.isFlatTop) {
-                [posX , posY] =[
-                    1.5 * x * size,
-                    size * (Math.sqrt(3)/2 * x  +  Math.sqrt(3) * y)
-                ];
-            } else {
-                [posX , posY] =[
-                    size * (Math.sqrt(3) * x  +  Math.sqrt(3)/2 * y),
-                    1.5 * y * size
-                ];
-            }
-            if(items[i]) {
-                console.log(items[i].el.querySelector('.hex-content'))
-                items[i].el.querySelector('.hex-content').innerHTML = `${x} , ${y} , ${z}`;
-                items[i].updateCords(posX + centerX  , posY + centerY);
-            }
-        }
-    }
-    const gridCords = getGridCoordinates( hexCubGridRadius(items.length) );
-    drawGrid(gridCords);
+    return gridCords;
 }
 
 const gridOffsetSize = (items, options) => {
     const {size, columns, isFlatTop} = options;
     const cellSize = size + options.gridGap;
-    const rows = Math.floor(items.length / columns) ;
+    const rows = Math.ceil(items.length / columns) ;
     if(isFlatTop) {
-        console.log(rows)
         return {
             width: ( (columns * 0.75) + 0.25) * hexWidth(cellSize, isFlatTop), 
             height: (rows + 0.5) * hexHeight(cellSize, isFlatTop)
@@ -181,4 +189,23 @@ const gridOffsetSize = (items, options) => {
     }
 }
 
-export {/* flatTopLayouter, */ pointedTopLayouter, flatTopCircularLayouter, offsetLayouter, gridOffsetSize}
+
+const getCircularLayoutSize = (itemsCount, cellSize, isFlatTop) => {
+    const radius = hexCubGridRadius(itemsCount);
+    const width = (radius - 1) * 2 + 1;
+    
+    if(isFlatTop) {
+        return {
+            width: hexWidth(cellSize, isFlatTop) * width,
+            height: width *  1.5 * hexHeight(cellSize, isFlatTop)
+        }
+
+    } else {
+        return {
+            width: hexWidth(cellSize, isFlatTop) * width,
+            height: ((width * 0.75) + 0.25) * hexHeight(cellSize, isFlatTop)
+        }
+    }
+}
+
+export {/* flatTopLayouter, */ pointedTopLayouter, circularLayouter, offsetLayouter, gridOffsetSize, getCircularLayoutSize}

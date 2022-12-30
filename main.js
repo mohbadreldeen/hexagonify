@@ -7,9 +7,9 @@ const fillCellsWithCords = (grid) => {
    grid.cells.forEach((cell, index) => {
      cell.el.Dom.el.innerHTML =
        cell.el.Dom.el.innerHTML +
-       grid1.gridCords[index]._x +
+       grid.gridCords[index]._x +
        "," +
-       grid1.gridCords[index]._y;
+       grid.gridCords[index]._y;
    });
  };
  
@@ -33,7 +33,7 @@ const grid1 = new HexagonifyGrid(document.getElementById("demo-03"), {
   gridGap: 1,
   borderRadius: 10,
   isFlatTop: true,
-  columns: 3,
+  columns: 4,
 });
 fillCellsWithCords(grid1);
 
@@ -42,8 +42,21 @@ const grid2 = new HexagonifyGrid(document.getElementById("demo-04"), {
   gridGap: 1,
   borderRadius: 10,
   isFlatTop: false,
-  columns: 3,
+  columns: 4
 });
 fillCellsWithCords(grid2);
+
+const grid3 = new HexagonifyGrid(document.getElementById("demo-05"), {
+  size: 100,
+  gridGap: 1,
+  borderRadius: 10,
+  isFlatTop: false,
+  columns: 3,
+  layouter: 'circularLayouter'
+});
+console.log(grid3);
+fillCellsWithCords(grid3);
+
+
 
 
