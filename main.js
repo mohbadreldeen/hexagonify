@@ -16,15 +16,22 @@ const fillCellsWithCords = (grid) => {
 new HexagonifyElement(document.querySelector("#demo-01"), {
   size: 100,
   borderRadius: 10,
+  contentSelector: '.hex-content',
+  strokeElement: {
+      size: 10,
+     
+      fill: '#ea698b'
+  }
+  
 });
 new HexagonifyElement(document.querySelector("#demo-02"), {
   size: 100,
-  isFlatTop: true,
+  isFlatTop: false,
   borderRadius: 10,
 });
 new HexagonifyElement(document.querySelector("#demo-01-1"), {
   size: 100,
-  isFlatTop: true,
+  isFlatTop: false,
   borderRadius: 0
 });
 

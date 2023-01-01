@@ -25,7 +25,7 @@
   --font-color: #1e1e32;
 
   --bg-color: #f1f3f5;
-  --heading-color: #818cab;
+  --heading-color: #1e1e32;
 }
 body {
   background-color: var(--bg-color);
@@ -91,7 +91,16 @@ body {
      padding: 100px 0;
      border-bottom: 1px solid rgba(0,0,0,.25);
 }
-.hex-cell {
+.demo-container.column {
+  flex-direction: column;
+}
+.borderless{
+  border:0 !important;
+}
+.demo-title {
+  color:var(--heading-color);
+}
+.hex-cell.hex-cell-naked {
   background-color: var(--hex-bg);
   color: var(--font-color);
   display: flex;
@@ -99,10 +108,23 @@ body {
   justify-content: center;
   flex-direction: column;
 }
-.hex-cell {
-  text-align: center;
+.hex-content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--hex-bg);
+  color: var(--font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
   padding: 35px 0;
+  text-align: center;
+  z-index: 10;
 }
+ 
 .hex-grid {
   height: 500px;
 }
