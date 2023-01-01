@@ -19,4 +19,4 @@ npm run build
   
 # Credit
 
-Inspired by [Red Blob Games](https://www.redblobgames.com/)
+Inspired by [Red Blob Games](https://www.redblobgames.com/grids/hexagons/)

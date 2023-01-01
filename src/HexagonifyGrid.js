@@ -1,6 +1,7 @@
 import HexagonifyElement from "./HexagonifyElement";
 import HexCell from "./HexCell";
 import {offsetLayouter, gridOffsetSize, circularLayouter, getCircularLayoutSize  } from "./GridLayouters";
+import HexSvg from "./HexSvg";
 
 export default class HexagonifGrid {
     constructor (el, options) {
@@ -30,11 +31,22 @@ export default class HexagonifGrid {
     init() {
         const cells = this.Dom.el.querySelectorAll(this.options.cellSeletor);
          
+
+        let mask = new HexSvg({
+            size: this.options.size,
+            borderRadius: this.options.borderRadius,
+            isFlatTop: this.options.isFlatTop,
+            isMask: true
+        });
+        this.Dom.el.appendChild(mask.svg);
+        const maskSelector = `#clip-mask-${mask.id}`;
+
         cells.forEach((cell, index) => {
            let hexEl = new HexagonifyElement(cell, {
                 size: this.options.size,
                 isFlatTop: this.options.isFlatTop,
-                borderRadius: this.options.borderRadius
+                borderRadius: this.options.borderRadius,
+                maskSelector: maskSelector
              }); 
               
              this.cells.push( new HexCell(hexEl, {}));

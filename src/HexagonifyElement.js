@@ -6,7 +6,8 @@ export default class HexagonifyElement {
         this.options = Object.assign({
             size: 100,
             borderRadius: 0,
-            isFlatTop: false
+            isFlatTop: false,
+            maskSelector: null
         }, options);    
 
        this.Dom = {
@@ -17,15 +18,18 @@ export default class HexagonifyElement {
 
     init() {
         this.Dom.el.classList.add("hexagonify-element");
-        let mask = new HexSvg({
-            size: this.options.size,
-            borderRadius: this.options.borderRadius,
-            isFlatTop: this.options.isFlatTop,
-            isMask: true
-        });
-        
-        this.Dom.el.appendChild(mask.svg);
-        const maskSelector = `#clip-mask-${mask.id}`;
+        let maskSelector = this.options.maskSelector;
+        if(!maskSelector) {
+            let mask = new HexSvg({
+                size: this.options.size,
+                borderRadius: this.options.borderRadius,
+                isFlatTop: this.options.isFlatTop,
+                isMask: true
+            });
+            this.Dom.el.appendChild(mask.svg);
+            maskSelector = `#clip-mask-${mask.id}`;
+        }
+
         const width = hexWidth(this.options.size, this.options.isFlatTop);
         const height = hexHeight(this.options.size, this.options.isFlatTop);
         this.Dom.el.style.width = width + "px";
